@@ -104,5 +104,82 @@ for animal in (bear, wolf):
 
 
 ############8############
+class City:
+    def __new__(cls, name, population):
+        if population > 1500:
+            return super().__new__(cls)
+        else:
+            return 'Your city is too small'
+
+    def __init__(self, name, population):
+        self.name = name
+        self.population = population
 
 
+Rozdilna = City('city1', 700)
+print(Rozdilna)
+Odesa = City('city2', 50000)
+print(Odesa)
+print(Odesa.population)
+
+
+############9############
+class City:
+    def __init__(self, name, population):
+        self.name = name
+        self.population = population
+
+    def __str__(self):
+        return f"The population of the city {self.name} is {self.population}"
+
+
+Kyiv = City('Kyiv', 80000)
+print(Kyiv)
+
+
+############10############
+class MagicAdd:
+    def __init__(self, a):
+        self.a = a
+
+    def __add__(self, b):
+        if b.a > 10 or self.a > 10:
+            return self.a * b.a
+        else:
+            return self.a + b.a
+
+
+a1 = MagicAdd(1)
+b1 = MagicAdd(4)
+print(a1 + b1)
+
+a2 = MagicAdd(15)
+b2 = MagicAdd(4)
+print(a2 + b2)
+
+
+############11############
+class Func:
+    def __call__(self, *args):
+        return sum(args)
+
+
+ex = Func()
+print(ex(4, 9, 13, 98))
+print(ex())
+
+
+############11############
+class MyOrder:
+    def __init__(self, cart, customer):
+        self.cart = cart
+        self.customer = customer
+
+    def __bool__(self):
+        return len(self.cart) > 0
+
+
+order_1 = MyOrder(['a', 'b', 'c'], 'd')
+order_2 = MyOrder([], 'a')
+print(bool(order_1))
+print(bool(order_2))
