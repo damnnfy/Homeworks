@@ -94,14 +94,11 @@ class Apple(Fruits):
 
 
 class TomatoBush:
-    def __init__(self, number_of_tomatoes, pests):
+    def __init__(self, number_of_tomatoes):
         self.tomatoes = [Tomato('Cherry', index) for index in range(0, number_of_tomatoes - 1)]
-        self.pests = pests
 
     def growth_all(self):
         for tomato in self.tomatoes:
-            if pests.quantity > 20:
-                pests.eat()
             tomato.growth()
 
     # def all_are_ripe(self):
@@ -119,14 +116,11 @@ class TomatoBush:
 
 
 class AppleTree:
-    def __init__(self, number_of_apples, pests):
+    def __init__(self, number_of_apples):
         self.apples = [Apple('White', index) for index in range(0, number_of_apples - 1)]
-        self.pests = pests
 
     def growth_all(self):
         for apple in self.apples:
-            if pests.quantity > 20:
-                pests.eat([tomato_bush, apple_tree])
             apple.growth()
 
     def all_are_ripe(self):
@@ -153,6 +147,12 @@ class Gardener:
             else:
                 print('Too early to harvest plants!')
 
+    def heel(self):
+        for plant in self.plants:
+            if pests.eat([tomato_bush, apple_tree]):
+             return(pests.quantity - 10)
+             print('Plants are okay!')
+
 
 class Pests:
     def __init__(self, type, quantity):
@@ -161,28 +161,26 @@ class Pests:
 
     def eat(self, plants):
         for plant in plants:
-            if plant.all_are_ripe():
+            if plant.all_are_ripe() and self.quantity > 20:
                 plant.give_away_all()
                 print('The plants are gone!')
             else:
                 print('The plants are in danger!')
 
 
-tomato_bush = TomatoBush(4, 12)
-apple_tree = AppleTree(10, 25)
+tomato_bush = TomatoBush(4)
+apple_tree = AppleTree(10)
 tom = Gardener('Tom', [tomato_bush, apple_tree])
-pests = Pests('worm', 12)
+pests = Pests('worm', 20)
 garden = Garden(vegetables=tomato_bush.tomatoes, fruits=apple_tree.apples)
 
-pests.eat([tomato_bush, apple_tree])
-pests.eat([tomato_bush, apple_tree])
-pests.eat([tomato_bush, apple_tree])
-pests.eat([tomato_bush, apple_tree])
-# tom.work()
-# tom.work()
-# tom.work()
-# tom.work()
-# tom.harvest()
+tom.work()
+tom.work()
+tom.work()
+tom.work()
+tom.heel()
+
+tom.harvest()
 garden.show_the_garden()
 #print(tomato_bush.tomatoes)
 #print(apple_tree.apples)
