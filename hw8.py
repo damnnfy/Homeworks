@@ -7,17 +7,23 @@ import random
 
 class Animal:
 
-    def __init__(self, power: int, speed: int):
+    def __init__(self, strength: int, speed: int):
         self.id = None
-        self.max_power = power
-        self.current_power = power
+        self.max_strength = strength
+        self.current_power = strength
         self.speed = speed
 
+    @abstractmethod
     def eat(self, forest: Forest):
         pass
 
 
 class Predator:
+    def __init__(self, strength: int, speed: int):
+        self.id = None
+        self.max_strength = strength
+        self.current_power = strength
+        self.speed = speed
 
     def eat(self, forest: Forest):
         pass
